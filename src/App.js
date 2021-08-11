@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Home from "./components/Home";
+import { useState } from "react";
+
+import { LoginContext } from "./Helper/Context";
+import { SignupContext } from "./Helper/Context";
+import { HomeContext } from "./Helper/Context";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [signUp, setSignUp] = useState(false);
+  const [Homee, setHome] = useState(false);
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LoginContext.Provider value={{ loggedIn, setLoggedIn }}>
+      <SignupContext.Provider value={{ signUp, setSignUp }}>
+        <HomeContext.Provider value={{ Homee, setHome }}>
+          {loggedIn ? <Login /> : ""}
+          {Homee ? <Home /> : ""}
+
+          {signUp ? <Signup /> : ""}
+        </HomeContext.Provider>
+      </SignupContext.Provider>
+    </LoginContext.Provider>
   );
 }
 
