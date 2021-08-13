@@ -3,6 +3,7 @@ import "../App.css";
 import { LoginContext } from "../Helper/Context";
 import { SignupContext } from "../Helper/Context";
 import { HomeContext } from "../Helper/Context";
+import {Link} from 'react-router-dom';
 
 function Signup() {
   const [fullname, setFullName] = useState("");
@@ -18,6 +19,20 @@ function Signup() {
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const { signUp, setSignUp } = useContext(SignupContext);
   const { Homee, setHome } = useContext(HomeContext);
+  const [loginflag,setLoginFlag]= useState(false);
+
+  const loginbox=(
+    <>
+        <button>
+          <Link style={{color:"green"}} to="/">
+          Succesfully Signed up, Go to login page.
+          </Link>
+        </button>
+  
+      </>
+    );
+
+
 
   const namebox = (
     <>
@@ -95,6 +110,8 @@ function Signup() {
 
       return;
     }
+
+    setLoginFlag(true);
     setHome(false);
 
     setLoggedIn(true);
@@ -140,10 +157,18 @@ function Signup() {
           class="login-input"
         />
         {passwordflag ? passwordbox : ""}
+
+        <Link style={{width:"100%"}} to="/Home">
         <button type="Sign-up" onClick={buttonHandler}>
           Sign-up
         </button>
+        </Link>
 
+        {loginflag? loginbox:""}
+
+
+
+        <Link style={{width:"100%"}} to="/">
         <button
           onClick={() => {
             setHome(false);
@@ -152,10 +177,12 @@ function Signup() {
 
             setSignUp(false);
           }}
-          style={{ color: "red" }}
+          style={{ color: "red",width:"100%" }}
         >
           Go Back
         </button>
+        </Link>
+
       </form>
     </div>
   );

@@ -4,6 +4,8 @@ import { LoginContext } from "../Helper/Context";
 import { SignupContext } from "../Helper/Context";
 import { HomeContext } from "../Helper/Context";
 
+import {Link} from 'react-router-dom';
+
 function Login() {
   const { loggedIn, setLoggedIn } = useContext(LoginContext);
   const { signUp, setSignUp } = useContext(SignupContext);
@@ -14,12 +16,28 @@ function Login() {
 
   const [emailflag, setEmailFlag] = useState(false);
   const [passwordflag, setPassWordFlag] = useState(false);
+  const [loginflag,setLoginFlag]= useState(false);
 
   const emailbox = (
     <>
+    
       <div className="login-valid-box">
+      <Link to="/Sign-up">
         Email should be of format saikumar9182@gmail.com
+        </Link>
       </div>
+      
+    </>
+  );
+
+  const loginbox=(
+  <>
+      <button>
+        <Link style={{color:"green"}} to="/Home">
+        Login
+        </Link>
+      </button>
+
     </>
   );
 
@@ -43,7 +61,7 @@ function Login() {
 
     if (!/^[^\s@#$%^&*()!]+@[^\s@#$%^&*()!]+\.[^\s@#$%^&*()!]+$/g.test(email)) {
       setEmailFlag(true);
-      console.log(emailflag);
+      
       return;
     } else if (
       /^.*(?=.{5,})(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%&*()])[a-zA-Z0-9!@#$%]+$/.test(
@@ -55,6 +73,10 @@ function Login() {
 
       return;
     }
+
+   setLoginFlag(true);
+
+
 
     setHome(true);
 
@@ -86,11 +108,21 @@ function Login() {
             class="login-input"
           />
           {passwordflag ? passwordbox : ""}
-          <button type="submit" onClick={buttonHandler}>
-            Login
-          </button>
-        </form>
 
+          <Link to="/Home"  style={{width:"100%"}} >
+          <button type="submit" onClick={buttonHandler}>
+          
+            CHECK
+            
+          </button>
+          </Link>
+
+          {loginflag? loginbox:""}
+          
+
+        </form>
+       
+       <Link to="/Sign-up">
         <h3
           onClick={() => {
             setLoggedIn(false);
@@ -102,6 +134,7 @@ function Login() {
         >
           New User? Sign up
         </h3>
+        </Link>
       </div>
     </>
   );

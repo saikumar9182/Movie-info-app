@@ -7,6 +7,8 @@ import { useState } from "react";
 import { LoginContext } from "./Helper/Context";
 import { SignupContext } from "./Helper/Context";
 import { HomeContext } from "./Helper/Context";
+import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -15,16 +17,31 @@ function App() {
   
 
   return (
+    <Router >
     <LoginContext.Provider value={{ loggedIn, setLoggedIn }}>
       <SignupContext.Provider value={{ signUp, setSignUp }}>
         <HomeContext.Provider value={{ Homee, setHome }}>
-          {loggedIn ? <Login /> : ""}
-          {Homee ? <Home /> : ""}
+        
+          <Switch>
+            
+              
+            <Route exact path="/" component={Login} />
+              
+             
 
-          {signUp ? <Signup /> : ""}
+            <Route exact  path="/Home" component={ Home }/>
+
+            <Route exact  path="/Sign-up" component={Signup}/>
+
+           
+
+          </Switch>
+          
         </HomeContext.Provider>
       </SignupContext.Provider>
-    </LoginContext.Provider>
+     </LoginContext.Provider>
+     </Router>
+    
   );
 }
 

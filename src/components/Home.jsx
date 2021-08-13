@@ -3,6 +3,7 @@ import "../App.css";
 import { LoginContext } from "../Helper/Context";
 import { SignupContext } from "../Helper/Context";
 import { HomeContext } from "../Helper/Context";
+import {Link} from 'react-router-dom';
 
 function Home() {
   const [input, setInput] = useState("");
@@ -60,6 +61,7 @@ function Home() {
 
   return (
     <div className="flexh">
+      <Link to='/'>
       <button
         onClick={() => {
           setHome(false);
@@ -80,6 +82,8 @@ function Home() {
       >
         LOG OUT
       </button>
+      </Link>
+
       <h1 style={{ color: "white", textAlign: "center" }}>
         Enter movie name here
         <i className="fa fa-hand-o-down" aria-hidden="true"></i>
